@@ -1,6 +1,7 @@
 package com.challengues.alura.topicos.domain.topicos;
 
 import com.challengues.alura.topicos.domain.cursos.Curso;
+import com.challengues.alura.topicos.domain.respuestas.Respuestas;
 import com.challengues.alura.topicos.domain.usuarios.Usuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

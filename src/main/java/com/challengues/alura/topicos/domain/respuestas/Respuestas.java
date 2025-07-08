@@ -1,7 +1,7 @@
-package com.challengues.alura.topicos.domain.topicos;
+package com.challengues.alura.topicos.domain.respuestas;
 
+import com.challengues.alura.topicos.domain.topicos.Topico;
 import com.challengues.alura.topicos.domain.usuarios.Usuario;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
