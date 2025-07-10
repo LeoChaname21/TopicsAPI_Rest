@@ -38,4 +38,12 @@ public class Topico {
     @OneToMany(mappedBy = "topico",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Respuestas> respuestas;
 
+    public Topico(DatosTopicos t) {
+        this.titulo = t.titulo();
+        this.mensaje = t.mensaje();
+        this.fechaCreacion = LocalDateTime.now();
+        this.status = true;
+        this.usuario = t.idusuario();
+        this.curso = t.idcurso();
+    }
 }

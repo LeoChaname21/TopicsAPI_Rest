@@ -4,5 +4,5 @@ public enum Categoria {
     CIENCIAS,
     MATEMATICAS,
     COMUNICACION,
-    HISTORIA
+    HISTORIA;
 }

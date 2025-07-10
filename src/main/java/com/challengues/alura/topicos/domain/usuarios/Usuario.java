@@ -21,6 +21,16 @@ public class Usuario {
     private String correoElectronico;
     private String contrasena;
     @ManyToOne
-    @JoinColumn(name = "perfil_id   ")
+    @JoinColumn(name = "perfil_id")
     private Perfil perfil;
+
+    private Boolean activo;
+
+    public Usuario(DatosUsuario u) {
+        this.nombre = u.nombre();
+        this.correoElectronico = u.correoElectronico();
+        this.contrasena = u.contrasena();
+        this.perfil = u.perfil();
+        this.activo = true;
+    }
 }

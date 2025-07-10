@@ -33,4 +33,18 @@ public class Respuestas {
     private Usuario usuario;
 
     private String solucion;
+
+    private Boolean status;
+
+
+    public Respuestas(DatosRespuestas r) {
+        this.mensaje = r.mensaje();
+        this.topico = r.idtopico();
+        this.fechaCreacion = LocalDateTime.now();
+        this.usuario = r.idusuario();
+        this.solucion = r.solucion();
+        this.status = true;
+    }
+
+
 }
