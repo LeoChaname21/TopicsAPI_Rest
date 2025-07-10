@@ -1,6 +1,7 @@
 package com.challengues.alura.topicos.domain.perfiles;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -22,5 +23,16 @@ public class Perfil {
     public Perfil(DatosPerfil p) {
         this.nombre = p.nombre();
         this.activo = true;
+    }
+
+    public void update(@Valid DatosActualizacionPerfil datosActualizacion) {
+
+        if(datosActualizacion.nombre() != null && !datosActualizacion.nombre().isEmpty()){
+            this.nombre = datosActualizacion.nombre();
+        }
+    }
+
+    public void delete() {
+        this.activo = false;
     }
 }

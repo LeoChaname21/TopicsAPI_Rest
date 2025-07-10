@@ -6,6 +6,7 @@ import com.challengues.alura.topicos.domain.cursos.DatosCurso;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,7 +30,7 @@ public class CursoController {
     }
 
     @GetMapping
-    public ResponseEntity showCursos(@PageableDefault(sort = {"categoria"}, size = 10) Pageable pag) {
+    public ResponseEntity showCursos(@PageableDefault(sort = {"id"},direction = Sort.Direction.DESC, size = 10) Pageable pag) {
         var cursos = cursoService.showCursos(pag);
         return ResponseEntity.ok(cursos);
     }
