@@ -26,6 +26,7 @@ public class Respuestas {
     @JoinColumn(name = "topico_id")
     private Topico topico;
 
+    @Column(name = "fecha_creacion")
     private LocalDateTime fechaCreacion;
 
     @ManyToOne(fetch = FetchType.LAZY)

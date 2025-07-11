@@ -1,0 +1,1 @@
+ALTER TABLE usuarios CHANGE correoElectronico correo_electronico VARCHAR(250);

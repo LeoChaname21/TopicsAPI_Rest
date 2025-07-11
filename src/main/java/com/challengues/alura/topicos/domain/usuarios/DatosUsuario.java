@@ -9,6 +9,6 @@ public record DatosUsuario(
         @NotBlank String nombre,
         @NotBlank @Email String correoElectronico,
         @NotBlank String contrasena,
-        @NotNull Perfil perfil
+        @NotNull Long id_perfil
 ) {
 }

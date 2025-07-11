@@ -19,7 +19,7 @@ public class PerfilService {
     }
 
     public Page<DatosListaPerfil> showPerfil(Pageable pag){
-        return perfilRepository.findAllByActivoTrue(pag)
+        return perfilRepository.findAll(pag)
                 .map(DatosListaPerfil::new);
     }
 
@@ -29,13 +29,10 @@ public class PerfilService {
         return new DatosPerfilDetalle(perfil);
     }
 
-    public void deletePerfil(Long id){
-        var perfil = perfilRepository.getReferenceById(id);
-        perfil.delete();
-    }
 
     public DatosPerfilDetalle showById(Long id) {
         var perfil = perfilRepository.getReferenceById(id);
         return new DatosPerfilDetalle(perfil);
     }
+
 }

@@ -18,11 +18,9 @@ public class Perfil {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
-    private Boolean activo;
 
     public Perfil(DatosPerfil p) {
         this.nombre = p.nombre();
-        this.activo = true;
     }
 
     public void update(@Valid DatosActualizacionPerfil datosActualizacion) {
@@ -32,7 +30,4 @@ public class Perfil {
         }
     }
 
-    public void delete() {
-        this.activo = false;
-    }
 }
