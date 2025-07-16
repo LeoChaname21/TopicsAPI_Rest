@@ -62,6 +62,10 @@ public class TopicoService {
 
     public DatosDetalleTopico updateTopico(DatosActualizacionTopico datos){
 
+        if(!topicoRepository.existsById(datos.id())){
+            throw new ValidacionExcepcion("No existe un topico con el id proporcionado");
+        }
+
         validadordeTopicosActualizados.forEach(v->v.validar(datos));
 
         var topico = topicoRepository.getReferenceById(datos.id());

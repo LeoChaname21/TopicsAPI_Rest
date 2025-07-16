@@ -3,6 +3,7 @@ package com.challengues.alura.topicos.domain.respuestas;
 import com.challengues.alura.topicos.domain.topicos.Topico;
 import com.challengues.alura.topicos.domain.usuarios.Usuario;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -18,7 +19,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(of = "id")
 public class Respuestas {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String mensaje;
 
@@ -38,14 +39,27 @@ public class Respuestas {
     private Boolean status;
 
 
-    public Respuestas(DatosRespuestas r) {
+    public Respuestas(DatosRespuestas r, Topico topico, Usuario usuario) {
         this.mensaje = r.mensaje();
-        this.topico = r.idtopico();
+        this.topico = topico;
         this.fechaCreacion = LocalDateTime.now();
-        this.usuario = r.idusuario();
+        this.usuario = usuario;
         this.solucion = r.solucion();
         this.status = true;
     }
 
 
+    public void update(@Valid DatosActualizacionRespuesta datosActualizacion) {
+        if(datosActualizacion.mensaje() != null && !datosActualizacion.mensaje().isEmpty()){
+            this.mensaje = datosActualizacion.mensaje();
+        }
+
+        if (datosActualizacion.solucion() != null && !datosActualizacion.solucion().isEmpty()) {
+            this.solucion = datosActualizacion.solucion();
+        }
+    }
+
+    public void delete() {
+        this.status = false;
+    }
 }

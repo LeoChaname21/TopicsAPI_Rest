@@ -44,7 +44,7 @@ public class Topico {
     public Topico(DatosTopicos t,Usuario usuario,Curso curso) {
         this.titulo = t.titulo();
         this.mensaje = t.mensaje();
-        this.fechaCreacion = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
+        this.fechaCreacion = LocalDateTime.now();
         this.status = true;
         this.usuario = usuario;
         this.curso = curso;
