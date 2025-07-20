@@ -35,4 +35,9 @@ public class PerfilService {
         return new DatosPerfilDetalle(perfil);
     }
 
+    public void deletePerfil(Long id){
+        var perfil = perfilRepository.getReferenceById(id);
+        perfil.delete();
+    }
+
 }

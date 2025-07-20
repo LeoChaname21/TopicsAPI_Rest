@@ -41,6 +41,13 @@ public class PerfilController {
         return ResponseEntity.ok(perfil);
     }
 
+    @Transactional
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletePerfil(@PathVariable Long id){
+        perfilService.deletePerfil(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity showbyId(@PathVariable Long id){
         var perfil = perfilService.showById(id);
