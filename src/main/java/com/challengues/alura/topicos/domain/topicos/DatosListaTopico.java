@@ -3,6 +3,7 @@ package com.challengues.alura.topicos.domain.topicos;
 import java.time.LocalDateTime;
 
 public record DatosListaTopico(
+        Long id,
         String titulo,
         String mensaje,
         LocalDateTime fecha,
@@ -10,7 +11,7 @@ public record DatosListaTopico(
         Long id_curso
 ) {
     public DatosListaTopico(Topico topico) {
-        this(topico.getTitulo(), topico.getMensaje(),
+        this(topico.getId(), topico.getTitulo(), topico.getMensaje(),
                 topico.getFechaCreacion(),topico.getUsuario().getId(),topico.getCurso().getId());
     }
 }
