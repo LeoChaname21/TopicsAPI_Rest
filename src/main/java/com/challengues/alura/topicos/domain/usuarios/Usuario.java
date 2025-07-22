@@ -43,9 +43,13 @@ public class Usuario implements UserDetails {
     public Usuario(DatosUsuario u, Perfil perfil) {
         this.nombre = u.nombre();
         this.correoElectronico = u.correoElectronico();
-        this.contrasena = new BCryptPasswordEncoder().encode(u.contrasena());
+        this.contrasena = this.encript(u.contrasena());
         this.perfil = perfil;
         this.activo = true;
+    }
+
+    private String encript(String contrasena){
+        return new BCryptPasswordEncoder().encode(contrasena);
     }
 
     public void update(@Valid DatosActualizacionUsuario datos) {
@@ -65,7 +69,7 @@ public class Usuario implements UserDetails {
     //security
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        return List.of(new SimpleGrantedAuthority("ROLE_"+this.perfil.getNombre()));
     }
 
     @Override
