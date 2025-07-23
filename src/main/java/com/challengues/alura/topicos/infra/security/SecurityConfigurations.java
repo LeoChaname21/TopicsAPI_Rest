@@ -33,7 +33,7 @@ public class SecurityConfigurations {
         return httpSecurity.csrf(csrf->csrf.disable())
                 .sessionManagement(sm->sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req->{
-                    req.requestMatchers("/auth/**").permitAll();
+                    req.requestMatchers("/auth/**","/v3/api-docs/**","/swagger-ui.html","/swagger-ui/**").permitAll();
                     req.requestMatchers("/topicos/**","/respuestas/**").hasAnyRole("USER","ADMIN");
                     req.requestMatchers("/**").hasRole("ADMIN");
                     req.anyRequest().denyAll();
@@ -57,7 +57,7 @@ public class SecurityConfigurations {
 
     @Bean
     public AccessDeniedHandler accessDeniedHandler(){
-        return ((request, response, accessDeniedException) -> {
+        return (request, response, accessDeniedException) -> {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             response.setContentType("application/json");
 
@@ -65,12 +65,12 @@ public class SecurityConfigurations {
             errorPermisos.put("error","No tienes los permisos necesarios para acceder a este recurso");
 
             new ObjectMapper().writeValue(response.getOutputStream(),errorPermisos);
-        });
+        };
     }
 
     @Bean
     public AuthenticationEntryPoint authenticationEntryPoint(){
-        return ((request, response, authException) -> {
+        return (request, response, authException) -> {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setContentType("application/json");
 
@@ -78,6 +78,6 @@ public class SecurityConfigurations {
             errorautenticacion.put("error","Token invalido o no proporcionado");
 
             new ObjectMapper().writeValue(response.getOutputStream(),errorautenticacion);
-        });
+        };
     }
 }

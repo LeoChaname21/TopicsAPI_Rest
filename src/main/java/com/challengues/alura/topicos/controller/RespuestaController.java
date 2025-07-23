@@ -2,6 +2,7 @@ package com.challengues.alura.topicos.controller;
 
 import com.challengues.alura.topicos.domain.respuestas.DatosActualizacionRespuesta;
 import com.challengues.alura.topicos.domain.respuestas.RespuestasService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/respuestas")
+@SecurityRequirement(name = "bearer-key")
 public class RespuestaController {
 
     @Autowired

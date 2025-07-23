@@ -3,6 +3,7 @@ package com.challengues.alura.topicos.controller;
 import com.challengues.alura.topicos.domain.perfiles.DatosActualizacionPerfil;
 import com.challengues.alura.topicos.domain.perfiles.DatosPerfil;
 import com.challengues.alura.topicos.domain.perfiles.PerfilService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/perfiles")
+@SecurityRequirement(name = "bearer-key")
 public class PerfilController {
 
     @Autowired

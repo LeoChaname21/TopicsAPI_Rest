@@ -5,6 +5,7 @@ import com.challengues.alura.topicos.domain.respuestas.RespuestasService;
 import com.challengues.alura.topicos.domain.topicos.DatosActualizacionTopico;
 import com.challengues.alura.topicos.domain.topicos.DatosTopicos;
 import com.challengues.alura.topicos.domain.topicos.TopicoService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/topicos")
+@SecurityRequirement(name = "bearer-key")
 public class TopicoController {
 
     @Autowired
