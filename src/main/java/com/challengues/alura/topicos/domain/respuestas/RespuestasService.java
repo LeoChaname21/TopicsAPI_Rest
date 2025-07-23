@@ -4,11 +4,15 @@ import com.challengues.alura.topicos.domain.respuestas.validaciones.ValidadordeR
 import com.challengues.alura.topicos.domain.respuestas.validaciones.ValidadordeRespuestasActualizadas;
 import com.challengues.alura.topicos.domain.topicos.DatosActualizacionTopico;
 import com.challengues.alura.topicos.domain.topicos.TopicoRepository;
+import com.challengues.alura.topicos.domain.usuarios.AuthUtils;
+import com.challengues.alura.topicos.domain.usuarios.Usuario;
 import com.challengues.alura.topicos.domain.usuarios.UsuarioRepository;
 import com.challengues.alura.topicos.infra.exceptions.ValidacionExcepcion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,6 +30,9 @@ public class RespuestasService {
     private UsuarioRepository usuarioRepository;
 
     @Autowired
+    private AuthUtils authUtils;
+
+    @Autowired
     private List<ValidadordeRespuestas> validadordeRespuestas;
 
     @Autowired
@@ -37,18 +44,21 @@ public class RespuestasService {
             throw new ValidacionExcepcion("No existe el topico con el id proporcionado");
         }
 
-        if(!usuarioRepository.existsById(datos.usuario_id())){
-            throw new ValidacionExcepcion("No existe el usuario con el id proporcionado");
-        }
+       // if(!usuarioRepository.existsById(datos.usuario_id())){
+         //   throw new ValidacionExcepcion("No existe el usuario con el id proporcionado");
+       // }
+
+        var authuser = authUtils.usuarioAutenticado();
+
 
         //validar aqui
         validadordeRespuestas.forEach(v->v.validar(id_topico));
 
         var topico = topicoRepository.getReferenceById(id_topico);
 
-        var usuario = usuarioRepository.getReferenceById(datos.usuario_id());
+        //var usuario = usuarioRepository.getReferenceById(authuser.getId());
 
-        var respuesta = new Respuestas(datos,topico,usuario);
+        var respuesta = new Respuestas(datos,topico,authuser);
 
         respuestaRepository.save(respuesta);
 

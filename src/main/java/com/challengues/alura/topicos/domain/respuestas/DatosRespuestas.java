@@ -7,7 +7,6 @@ import jakarta.validation.constraints.NotNull;
 
 public record DatosRespuestas(
     @NotBlank String mensaje,
-    @NotNull Long usuario_id,
     @NotBlank String solucion
 ) {
 }

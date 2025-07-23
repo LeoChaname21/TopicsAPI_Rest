@@ -11,7 +11,6 @@ public record DatosTopicos(
         @NotBlank String titulo,
         @NotBlank String mensaje,
         //LocalDateTime fechaCreacion, no tendria que pasarlo, se deberia crear en el constructor
-        @NotNull Long usuario_id,
         @NotNull Long curso_id
 ) {
 }

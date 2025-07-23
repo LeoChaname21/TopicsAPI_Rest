@@ -24,6 +24,7 @@ public class TokenService {
             return JWT.create()
                     .withIssuer("API Topicos.byLeo")
                     .withSubject(usuario.getCorreoElectronico())
+                    .withClaim("id",usuario.getId())
                     .withExpiresAt(fechaExpiracion())
                     .sign(algorithm);
         }catch (JWTCreationException ex){
@@ -43,6 +44,19 @@ public class TokenService {
                     .build()
                     .verify(tokenJWT)
                     .getSubject();
+        } catch (JWTVerificationException ex) {
+            throw new RuntimeException("Token JWT invalido o expirado", ex);
+        }
+    }
+
+    public Long getID(String tokenJWT){
+        try{
+            Algorithm algorithm =Algorithm.HMAC256(secret);
+            return JWT.require(algorithm)
+                    .withIssuer("API Topicos.byLeo")
+                    .build()
+                    .verify(tokenJWT)
+                    .getClaim("id").asLong();
         } catch (JWTVerificationException ex) {
             throw new RuntimeException("Token JWT invalido o expirado", ex);
         }
