@@ -14,4 +14,5 @@ public interface TopicoRepository extends JpaRepository<Topico, Long> {
     @Query("SELECT t.status FROM Topico t WHERE t.id = :idtopico")
     Boolean findStatusById(Long idtopico);
 
+
 }

@@ -26,8 +26,12 @@ public class Topico {
     private Long id;
     private String titulo;
     private String mensaje;
+
     @Column(name = "fecha_creacion")
     private LocalDateTime fechaCreacion;
+
+    private LocalDateTime fecha_actualizacion;
+
     private Boolean status;
 
     @ManyToOne
@@ -45,6 +49,7 @@ public class Topico {
         this.titulo = t.titulo();
         this.mensaje = t.mensaje();
         this.fechaCreacion = LocalDateTime.now();
+        this.fecha_actualizacion = fechaCreacion;
         this.status = true;
         this.usuario = usuario;
         this.curso = curso;
@@ -56,17 +61,19 @@ public class Topico {
 
     public void update(@Valid DatosActualizacionTopico datos,Curso curso) {
 
-        if(datos.titulo() != null && !datos.titulo().isEmpty()){
+        if(datos.titulo() != null && !datos.titulo().isBlank()){
             this.titulo = datos.titulo();
         }
 
-        if(datos.mensaje()!=null && !datos.mensaje().isEmpty()){
+        if(datos.mensaje()!=null && !datos.mensaje().isBlank()){
             this.mensaje = datos.mensaje();
         }
 
         if(datos.curso_id()!=null){
             this.curso = curso;
         }
+
+        this.fecha_actualizacion = LocalDateTime.now();
 
     }
 }

@@ -30,6 +30,8 @@ public class Respuestas {
     @Column(name = "fecha_creacion")
     private LocalDateTime fechaCreacion;
 
+    private LocalDateTime fecha_actualizacion;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
@@ -43,6 +45,7 @@ public class Respuestas {
         this.mensaje = r.mensaje();
         this.topico = topico;
         this.fechaCreacion = LocalDateTime.now();
+        this.fecha_actualizacion = fechaCreacion;
         this.usuario = usuario;
         this.solucion = r.solucion();
         this.status = true;
@@ -50,13 +53,15 @@ public class Respuestas {
 
 
     public void update(@Valid DatosActualizacionRespuesta datosActualizacion) {
-        if(datosActualizacion.mensaje() != null && !datosActualizacion.mensaje().isEmpty()){
+        if(datosActualizacion.mensaje() != null && !datosActualizacion.mensaje().isBlank()){
             this.mensaje = datosActualizacion.mensaje();
         }
 
-        if (datosActualizacion.solucion() != null && !datosActualizacion.solucion().isEmpty()) {
+        if (datosActualizacion.solucion() != null && !datosActualizacion.solucion().isBlank()) {
             this.solucion = datosActualizacion.solucion();
         }
+
+        this.fecha_actualizacion = LocalDateTime.now();
     }
 
     public void delete() {

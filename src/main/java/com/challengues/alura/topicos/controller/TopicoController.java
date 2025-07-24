@@ -35,7 +35,7 @@ public class TopicoController {
     }
 
     @GetMapping
-    public ResponseEntity showTopicos(@PageableDefault(size = 10,sort = {"fechaCreacion"},direction = Sort.Direction.ASC) Pageable pag){
+    public ResponseEntity showTopicos(@PageableDefault(size = 10,sort = {"fechaCreacion"},direction = Sort.Direction.DESC) Pageable pag){
         var topicos = topicoService.showTopicos(pag);
         return ResponseEntity.ok(topicos);
     }

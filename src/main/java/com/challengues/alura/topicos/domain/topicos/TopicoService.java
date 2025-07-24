@@ -79,14 +79,15 @@ public class TopicoService {
             throw new ValidacionExcepcion("No existe un topico con el id proporcionado");
         }
 
+        if(datos.curso_id()!=null && !cursoRepository.existsById(datos.curso_id())){
+            throw new ValidacionExcepcion("No existe un curso con el id proporcionado");
+        }
+
         validadordeTopicosActualizados.forEach(v->v.validar(datos));
 
         var topico = topicoRepository.getReferenceById(datos.id());
         Curso curso = null;
         if(datos.curso_id()!=null){
-            if(!cursoRepository.existsById(datos.curso_id())){
-                throw new ValidacionExcepcion("No existe un curso con el id proporcionado");
-            }
             curso = cursoRepository.getReferenceById(datos.curso_id());
         }
         topico.update(datos,curso);

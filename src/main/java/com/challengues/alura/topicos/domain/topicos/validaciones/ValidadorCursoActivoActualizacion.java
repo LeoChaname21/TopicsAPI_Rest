@@ -15,6 +15,10 @@ public class ValidadorCursoActivoActualizacion implements ValidadordeTopicosActu
 
     public void validar(DatosActualizacionTopico datosActualizacionTopico){
 
+        if(datosActualizacionTopico.curso_id() == null){
+            return;
+        }
+
         var curso = cursoRepository.findActivoById(datosActualizacionTopico.curso_id());
 
         if(!curso){

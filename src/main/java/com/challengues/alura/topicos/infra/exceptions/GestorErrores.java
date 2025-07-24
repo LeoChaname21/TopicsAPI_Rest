@@ -2,8 +2,10 @@ package com.challengues.alura.topicos.infra.exceptions;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -66,6 +68,13 @@ public class GestorErrores {
         }
         error.put("error",errorValidacion);
         return ResponseEntity.badRequest().body(error);
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity errorCredenciales(){
+        Map<String,String> error = new HashMap<>();
+        error.put("error","credenciales incorrectas");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
     }
 
     public record DatosErrorValidacion(String campo, String mensaje){
