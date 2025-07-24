@@ -10,9 +10,7 @@ RUN mvn clean package -DskipTests
 
 FROM mcr.microsoft.com/openjdk/jdk:17-ubuntu as base
 
-WORKDIR /app
-
-COPY --from=build /app/target/*.jar app.jar
+COPY --from=build /app/target/*.jar /app.jar
 
 EXPOSE 8081
 
