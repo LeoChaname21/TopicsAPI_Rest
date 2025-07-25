@@ -16,4 +16,6 @@ EXPOSE 8081
 
 ENV TZ=America/Lima
 
-ENTRYPOINT ["java","-jar","/app.jar","--spring.profiles.active=prod"]
+ENV SPRING_PROFILES_ACTIVE=prod
+
+ENTRYPOINT ["java","-jar","/app.jar"]
