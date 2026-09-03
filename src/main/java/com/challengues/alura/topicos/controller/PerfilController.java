@@ -17,7 +17,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RestController
 @RequestMapping("/perfiles")
 @SecurityRequirement(name = "bearer-key")
-public class PerfilController {
+public class
+PerfilController {
 
     @Autowired
     private PerfilService perfilService;
