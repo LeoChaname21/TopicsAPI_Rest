@@ -1,5 +1,6 @@
 package com.challengues.alura.topicos.controller;
 
+import com.challengues.alura.topicos.domain.cursos.Categoria;
 import com.challengues.alura.topicos.domain.cursos.CursoService;
 import com.challengues.alura.topicos.domain.cursos.DatosActualizacionCurso;
 import com.challengues.alura.topicos.domain.cursos.DatosCurso;
@@ -55,6 +56,14 @@ public class CursoController {
     public ResponseEntity showbyid(@PathVariable Long id){
         var curso = cursoService.showbyId(id);
         return ResponseEntity.ok(curso);
+    }
+
+    @GetMapping("/categoria/{categoria}")
+    public ResponseEntity showCursosPorCategoria(
+            @PathVariable Categoria categoria,
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 10) Pageable pag) {
+        var cursos = cursoService.showCursosPorCategoria(categoria, pag);
+        return ResponseEntity.ok(cursos);
     }
 
 

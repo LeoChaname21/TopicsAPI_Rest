@@ -38,4 +38,9 @@ public class CursoService {
         return new DatosDetalleCurso(curso);
     }
 
+    public Page<DatosListaCurso> showCursosPorCategoria(Categoria categoria, Pageable pag){
+        return cursoRepository.findAllByActivoTrueAndCategoria(categoria, pag)
+                .map(DatosListaCurso::new);
+    }
+
 }

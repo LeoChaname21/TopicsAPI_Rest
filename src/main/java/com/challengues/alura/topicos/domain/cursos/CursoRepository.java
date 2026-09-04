@@ -11,4 +11,8 @@ public interface CursoRepository extends JpaRepository<Curso,Long> {
 
     @Query("SELECT c.activo FROM Curso c WHERE c.id = :id")
     Boolean findActivoById(Long id);
+
+    Page<Curso> findAllByActivoTrueAndCategoria(Categoria categoria, Pageable pag);
+
+
 }
